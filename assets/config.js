@@ -4,10 +4,9 @@ export const API_BASE = 'https://api.github.com';
 export const DEFAULT_CONCURRENCY = 6;
 export const MAX_FILES = 4000;
 export const LOGO_SRC = 'assets/logo.svg';
-export const FOOTER_TEXT = 'Built by Majkey25 · GitHub Pages';
+export const FOOTER_TEXT = 'Built by Majkey25 - GitHub Pages';
 export const FOOTER_LINK = 'https://majkey25.github.io/My-website-for-fun/';
 export const SAMPLES = [
-  'vercel/next.js/examples/with-tailwindcss',
-  'pallets/flask/examples/tutorial'
+  'vercel/next.js/tree/canary/examples/blog-starter',
+  'microsoft/TypeScript/tree/main/src/compiler'
 ];
-

@@ -39,12 +39,12 @@ function setBranding() {
   brandLogoEl.src = LOGO_SRC;
   brandLogoEl.alt = `${APP_NAME} logo`;
   if (faviconEl) {
-    faviconEl.href = `${LOGO_SRC}?v=2`;
+    faviconEl.href = `${LOGO_SRC}?v=3`;
   }
   document.title = APP_NAME;
   heroTitleEl.textContent = 'Download any GitHub folder';
   heroTaglineEl.textContent = TAGLINE;
-  eyebrowEl.textContent = `${APP_NAME} · Client-side`;
+  eyebrowEl.textContent = `${APP_NAME} - Client-side`;
   footerLinkEl.href = FOOTER_LINK;
   footerTextEl.textContent = FOOTER_TEXT;
 }

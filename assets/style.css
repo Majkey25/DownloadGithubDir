@@ -7,6 +7,7 @@
   --muted: #9ca3af;
   --accent: #2563eb;
   --accent-2: #14b8a6;
+  --glow: rgba(37, 99, 235, 0.25);
   --shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
 }
 
@@ -20,7 +21,7 @@ body {
   color: var(--text);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
-  padding-bottom: 120px;
+  padding-bottom: 160px;
 }
 
 .bg-overlay {
@@ -37,14 +38,17 @@ body {
 .topbar {
   position: sticky;
   top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px 28px;
-  background: rgba(11, 16, 32, 0.65);
-  backdrop-filter: blur(10px);
+  background: rgba(11, 16, 32, 0.78);
+  backdrop-filter: blur(14px);
   border: 1px solid var(--border);
   border-radius: 0 0 18px 18px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
   z-index: 2;
   gap: 12px;
 }
@@ -55,6 +59,17 @@ body {
   gap: 10px;
   font-weight: 700;
   letter-spacing: 0.4px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+}
+
+.brand:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+  border-color: rgba(37, 99, 235, 0.4);
 }
 
 .brand-logo {
@@ -63,17 +78,38 @@ body {
   border-radius: 8px;
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+  object-fit: contain;
+  padding: 2px;
+  display: block;
+}
+
+.nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
 }
 
 .nav a {
   color: var(--muted);
   text-decoration: none;
-  margin-left: 16px;
+  margin-left: 0;
   font-size: 14px;
-  transition: color 0.15s ease, transform 0.2s ease;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: color 0.15s ease, transform 0.2s ease,
+    background 0.2s ease;
 }
 
-.nav a:hover { color: var(--text); transform: translateY(-1px); }
+.nav a:hover {
+  color: var(--text);
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.06);
+}
 
 .layout {
   position: relative;
@@ -85,6 +121,7 @@ body {
 }
 
 .panel {
+  position: relative;
   background: linear-gradient(145deg, var(--panel), var(--panel-2));
   border: 1px solid var(--border);
   border-radius: 18px;
@@ -92,10 +129,29 @@ body {
   padding: 26px;
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.4s ease,
+    border-color 0.3s ease;
 }
 
-.panel:hover { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4); }
+.panel::after {
+  content: '';
+  position: absolute;
+  inset: -30%;
+  background: radial-gradient(circle at 30% 20%, var(--glow), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(20, 184, 166, 0.2), transparent 36%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.panel:hover {
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.42);
+  transform: translateY(-4px) scale(1.005);
+  border-color: rgba(37, 99, 235, 0.4);
+}
+
+.panel:hover::after { opacity: 1; }
 
 .hero { display: grid; gap: 18px; }
 
@@ -125,15 +181,23 @@ body {
   color: var(--text);
   cursor: pointer;
   font-size: 13px;
-  transition: border 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
+  transition: border 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease,
+    background 0.2s ease;
   transform: translateZ(0);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(6px);
 }
 
 .chip:hover {
   border-color: rgba(37, 99, 235, 0.7);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.2);
+  background: rgba(37, 99, 235, 0.12);
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .form { display: grid; gap: 14px; }
@@ -234,6 +298,8 @@ button:disabled {
   transform: translateY(12px);
   transition: opacity 0.45s ease, transform 0.45s ease, box-shadow 0.25s ease,
     border-color 0.25s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .note h3 { margin: 0 0 8px; font-size: 16px; }
@@ -241,10 +307,22 @@ button:disabled {
 .note p { margin: 0; color: var(--muted); line-height: 1.5; }
 
 .note:hover {
-  transform: translateY(-4px) scale(1.005);
+  transform: translateY(-8px) scale(1.02) rotateX(0.8deg) rotateY(-0.6deg);
   border-color: rgba(37, 99, 235, 0.4);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
+
+.note::after {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 20% 20%, var(--glow), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.note:hover::after { opacity: 1; }
 
 .footer {
   position: fixed;
@@ -255,48 +333,82 @@ button:disabled {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 8px 12px;
+  padding: 0;
   z-index: 3;
-  pointer-events: none;
 }
 
 .footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: rgba(11, 16, 32, 0.85);
+  border: 1px solid var(--border);
+  border-radius: 16px;
   text-decoration: none;
   color: inherit;
-  pointer-events: auto;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(12px);
+  transition: transform 0.25s ease, border-color 0.2s ease,
+    box-shadow 0.25s ease;
 }
 
 .footer-chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 20px;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid var(--border);
+  padding: 0;
+  border-radius: 12px;
   color: var(--text);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(10px);
   animation: float 6s ease-in-out infinite;
 }
 
-.footer-chip:hover { border-color: rgba(37, 99, 235, 0.7); }
+.footer-link:hover {
+  transform: translateY(-4px);
+  border-color: rgba(37, 99, 235, 0.7);
+  box-shadow: 0 22px 54px rgba(0, 0, 0, 0.38);
+}
 
 @media (max-width: 768px) {
-  body { padding-bottom: 140px; }
+  body { padding-bottom: 180px; }
   .topbar {
     padding: 12px 16px;
     border-radius: 0 0 14px 14px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
   }
   .nav { display: none; }
-  .layout { width: 94vw; margin-top: 12px; }
-  .hero h1 { font-size: 28px; }
+  .layout { width: 96vw; margin-top: 14px; }
+  .hero h1 { font-size: 28px; line-height: 1.2; }
   .panel { padding: 18px; }
   .grid { grid-template-columns: 1fr; }
-  .chips { gap: 8px; }
-  .footer { bottom: 12px; }
-  .footer-chip { padding: 10px 16px; }
+  .chips {
+    gap: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+  .chips::-webkit-scrollbar { height: 6px; }
+  .chips::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+  }
+  .footer {
+    left: 50%;
+    width: calc(100% - 24px);
+    transform: translateX(-50%);
+    bottom: 12px;
+  }
+  .footer-link { width: 100%; justify-content: center; }
   button { width: 100%; }
+}
+
+@media (max-width: 520px) {
+  .brand { padding: 6px 10px; gap: 8px; }
+  .brand-logo { width: 26px; height: 26px; }
+  .brand span { font-size: 14px; }
+  .layout { width: 98vw; }
+  input { font-size: 14px; }
+  .footer-link { padding: 12px 14px; }
 }
 
 @keyframes drift {
@@ -318,7 +430,19 @@ button:disabled {
 body.ready .panel { opacity: 1; transform: translateY(0); }
 body.ready .hero { transition-delay: 0.05s; }
 body.ready .form { transition-delay: 0.1s; }
-body.ready .info .note:nth-child(1) { transition-delay: 0.12s; opacity: 1; transform: translateY(0); }
-body.ready .info .note:nth-child(2) { transition-delay: 0.16s; opacity: 1; transform: translateY(0); }
-body.ready .info .note:nth-child(3) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+body.ready .info .note:nth-child(1) {
+  transition-delay: 0.12s;
+  opacity: 1;
+  transform: translateY(0);
+}
+body.ready .info .note:nth-child(2) {
+  transition-delay: 0.16s;
+  opacity: 1;
+  transform: translateY(0);
+}
+body.ready .info .note:nth-child(3) {
+  transition-delay: 0.2s;
+  opacity: 1;
+  transform: translateY(0);
+}
 
