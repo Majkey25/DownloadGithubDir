@@ -26,13 +26,28 @@ const eyebrowEl = document.getElementById('eyebrow');
 const faviconEl = document.getElementById('favicon');
 const footerLinkEl = document.getElementById('footer-link');
 const footerTextEl = document.getElementById('footer-text');
+const typingSamples = SAMPLES.map(sample => `https://github.com/${sample}`);
+
+let typingTimer = null;
+let typingIndex = 0;
+let typingCharIndex = 0;
+let typingEnabled = true;
 
 let abortCurrent = null;
 
 setBranding();
 initSamples();
+startTypingPlaceholder();
 window.addEventListener('DOMContentLoaded', () => document.body.classList.add('ready'));
 formEl.addEventListener('submit', onSubmit);
+inputEl.addEventListener('focus', stopTypingPlaceholder);
+inputEl.addEventListener('input', stopTypingPlaceholder);
+inputEl.addEventListener('blur', () => {
+  if (!inputEl.value) {
+    typingCharIndex = 0;
+    startTypingPlaceholder();
+  }
+});
 
 function setBranding() {
   brandTextEl.textContent = APP_NAME;
@@ -44,7 +59,7 @@ function setBranding() {
   document.title = APP_NAME;
   heroTitleEl.textContent = 'Download any GitHub folder';
   heroTaglineEl.textContent = TAGLINE;
-  eyebrowEl.textContent = `${APP_NAME} - Client-side`;
+  eyebrowEl.textContent = 'Instant GitHub folder ZIPs — client-side';
   footerLinkEl.href = FOOTER_LINK;
   footerTextEl.textContent = FOOTER_TEXT;
 }
@@ -60,6 +75,40 @@ function initSamples() {
     });
     samplesEl.appendChild(chip);
   });
+}
+
+function startTypingPlaceholder() {
+  if (!typingEnabled || inputEl.value) {
+    return;
+  }
+  typingEnabled = true;
+  runTypingFrame();
+}
+
+function stopTypingPlaceholder() {
+  typingEnabled = false;
+  if (typingTimer) {
+    clearTimeout(typingTimer);
+    typingTimer = null;
+  }
+}
+
+function runTypingFrame() {
+  if (!typingEnabled || document.activeElement === inputEl || inputEl.value) {
+    return;
+  }
+  const current = typingSamples[typingIndex % typingSamples.length];
+  inputEl.placeholder = current.slice(0, typingCharIndex);
+  if (typingCharIndex < current.length) {
+    typingCharIndex += 1;
+    typingTimer = setTimeout(runTypingFrame, 85);
+  } else {
+    typingTimer = setTimeout(() => {
+      typingCharIndex = 0;
+      typingIndex += 1;
+      runTypingFrame();
+    }, 1400);
+  }
 }
 
 async function onSubmit(event) {
