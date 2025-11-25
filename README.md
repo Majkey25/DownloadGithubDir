@@ -1,34 +1,43 @@
-﻿# DirFetch – GitHub directory downloader
+﻿# DownloadGithubDir
 
-Single-page, client-side tool to download any GitHub repository folder as a ZIP. No backend, no rate limits beyond GitHub defaults, works on GitHub Pages for free.
+Simple, client-side tool to download any GitHub repository folder as a ZIP. No backend, free to host
+on GitHub Pages, built for clarity and speed.
 
 ## Features
-- Paste a GitHub URL or `owner/repo/path` and download only that folder.
-- Optional branch override and personal access token to avoid rate limits.
-- Clean, responsive UI; runs entirely in the browser with JSZip.
-- Safe for private repos when you provide a token (token stays in-browser).
+- Paste a GitHub URL or `owner/repo/path` and fetch only that folder.
+- Optional branch override and personal access token to avoid rate limits or access private repos.
+- Parallel downloads with JSZip packaging in the browser; cancel support and live progress.
+- Clean, responsive UI with sample shortcuts; no data leaves your browser.
+- Ready-to-ship GitHub Actions workflow for Pages deployment.
 
-## Running locally
-Serve the folder with any static server:
-
+## Quick start (local)
 ```bash
 python -m http.server 8000
-# then open http://localhost:8000
+# open http://localhost:8000
 ```
 
-## Deploying to GitHub Pages
-1. Commit and push this repository to GitHub.
-2. Enable Actions and Pages.
-3. The workflow in `.github/workflows/pages.yml` builds (no build step) and publishes `index.html` plus assets to Pages.
-
 ## Usage
-1. Open the site.
-2. Paste e.g. `https://github.com/torvalds/linux/tree/master/Documentation`.
-3. Click **Download ZIP**. Progress and status appear at the bottom of the form.
-4. Optionally set a branch or token if you hit the rate limit.
+1. Paste a GitHub folder URL or `owner/repo/path`.
+2. (Optional) Enter branch or tag, and a token if you hit rate limits or need private access.
+3. Click **Download ZIP**. Watch progress; cancel anytime.
 
-## Notes
-- Large folders: capped at 4000 files to avoid API and memory limits.
-- Errors like `403` usually mean GitHub rate limiting; add a token to continue.
-- Everything runs in your browser; nothing is stored or sent elsewhere.
+## Deploy to GitHub Pages
+1. Push this repository to GitHub on the `main` branch.
+2. Pages workflow `.github/workflows/pages.yml` uploads the static files and deploys via Actions.
+3. Enable GitHub Pages in repository settings → Pages → Source: "GitHub Actions".
+
+## Tokens and privacy
+- Tokens are used only in your browser requests and are never stored or sent anywhere else.
+- For private repos, use a token with minimal `repo` scope.
+
+## Limits
+- Soft cap of 4000 files to keep API and memory usage safe.
+- If you see `403`, add a token or narrow the folder.
+
+## Tech
+- Vanilla JS + Fetch API + JSZip + FileSaver.
+- Static HTML/CSS; no build step required.
+
+## License
+MIT
 

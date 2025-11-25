@@ -1,4 +1,6 @@
 ﻿import {
+  APP_NAME,
+  TAGLINE,
   API_BASE,
   DEFAULT_CONCURRENCY,
   MAX_FILES,
@@ -13,15 +15,29 @@ const submitEl = document.getElementById('submit');
 const statusTextEl = document.getElementById('status-text');
 const progressEl = document.getElementById('progress');
 const samplesEl = document.getElementById('sample-links');
+const brandEl = document.getElementById('brand');
+const heroTitleEl = document.getElementById('hero-title');
+const heroTaglineEl = document.getElementById('hero-tagline');
+const eyebrowEl = document.getElementById('eyebrow');
 
 let abortCurrent = null;
 
+setBranding();
 initSamples();
 formEl.addEventListener('submit', onSubmit);
 
+function setBranding() {
+  brandEl.textContent = APP_NAME;
+  document.title = APP_NAME;
+  heroTitleEl.textContent = 'Download any GitHub folder';
+  heroTaglineEl.textContent = TAGLINE;
+  eyebrowEl.textContent = `${APP_NAME} · Client-side`;
+}
+
 function initSamples() {
   SAMPLES.forEach(sample => {
-    const chip = document.createElement('div');
+    const chip = document.createElement('button');
+    chip.type = 'button';
     chip.className = 'chip';
     chip.textContent = sample;
     chip.addEventListener('click', () => {
@@ -123,7 +139,7 @@ function parseInput(raw) {
     }
     const parts = url.pathname.replace(/^\//, '').split('/');
     return parseParts(parts);
-  } catch (err) {
+  } catch (error) {
     const parts = cleaned.replace(/^\//, '').split('/');
     return parseParts(parts);
   }
@@ -181,37 +197,33 @@ async function collectFiles({ owner, repo, branch, directory, token, files, sign
 
 async function downloadFile(file, token, signal) {
   const headers = token ? { Authorization: `Bearer ${token}` } : {};
-  const res = await fetch(file.download_url, { headers, signal });
-  if (!res.ok) {
-    const msg = res.status === 403
+  const response = await fetch(file.download_url, { headers, signal });
+  if (!response.ok) {
+    const message = response.status === 403
       ? 'Rate limited. Add a token.'
       : `Failed to fetch ${file.path}`;
-    throw new Error(msg);
+    throw new Error(message);
   }
-  return await res.arrayBuffer();
+  return await response.arrayBuffer();
 }
 
 async function fetchJson(url, token, signal) {
-  const headers = {
-    Accept: 'application/vnd.github+json'
-  };
+  const headers = { Accept: 'application/vnd.github+json' };
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }
-  const res = await fetch(url, { headers, signal });
-  if (!res.ok) {
-    const msg = res.status === 403
+  const response = await fetch(url, { headers, signal });
+  if (!response.ok) {
+    const message = response.status === 403
       ? 'Hit the GitHub rate limit. Add a token.'
-      : `GitHub responded with ${res.status}`;
-    throw new Error(msg);
+      : `GitHub responded with ${response.status}`;
+    throw new Error(message);
   }
-  return await res.json();
+  return await response.json();
 }
 
 function buildContentsUrl(owner, repo, path, branch) {
-  const encodedPath = path
-    ? path.split('/').map(encodeURIComponent).join('/')
-    : '';
+  const encodedPath = path ? path.split('/').map(encodeURIComponent).join('/') : '';
   const encodedBranch = encodeURIComponent(branch);
   return `${API_BASE}/repos/${owner}/${repo}/contents/${encodedPath}?ref=${encodedBranch}`;
 }

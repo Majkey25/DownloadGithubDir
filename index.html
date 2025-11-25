@@ -3,39 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GitHub Directory Downloader</title>
+  <title>DownloadGithubDir</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-  <div class="bg-glow"></div>
+  <div class="bg-overlay"></div>
   <header class="topbar">
-    <div class="brand">DirFetch</div>
-    <nav>
+    <div class="brand" id="brand">DownloadGithubDir</div>
+    <nav class="nav">
+      <a href="https://docs.github.com/en/rest" target="_blank" rel="noreferrer">GitHub API</a>
       <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
-      <a href="https://docs.github.com/en/rest" target="_blank" rel="noreferrer">API</a>
     </nav>
   </header>
 
-  <main class="shell">
-    <section class="hero">
+  <main class="layout">
+    <section class="panel hero">
       <div>
-        <p class="eyebrow">Free · Client-side · No limits</p>
-        <h1>Download any GitHub folder as a ZIP.</h1>
-        <p class="lede">Paste a GitHub URL or owner/repo/path. We fetch only the files you need and pack them instantly in your browser.</p>
+        <p class="eyebrow" id="eyebrow">Client-side · Free</p>
+        <h1 id="hero-title">Download any GitHub folder</h1>
+        <p class="lede" id="hero-tagline">Download any GitHub folder as a ZIP, entirely in your browser.</p>
         <div class="chips" id="sample-links"></div>
       </div>
-    </section>
 
-    <section class="panel">
-      <form id="download-form">
-        <label>GitHub URL or path</label>
-        <div class="input-row">
-          <input id="input" name="input" autocomplete="off" placeholder="https://github.com/owner/repo/tree/branch/path" required>
-          <button type="submit" id="submit">Download ZIP</button>
-        </div>
+      <form id="download-form" class="form">
+        <label for="input">GitHub URL or owner/repo/path</label>
+        <input id="input" name="input" autocomplete="off"
+          placeholder="https://github.com/owner/repo/tree/branch/path" required>
 
         <div class="grid">
           <div class="field">
@@ -45,9 +41,11 @@
           <div class="field">
             <label for="token">Personal access token (optional)</label>
             <input id="token" name="token" autocomplete="off" placeholder="ghp_xxx" type="password">
-            <p class="hint">Token is used only in your browser to raise the rate limit.</p>
+            <p class="hint">Token stays in your browser; use if you hit rate limits or for private repos.</p>
           </div>
         </div>
+
+        <button type="submit" id="submit">Download ZIP</button>
 
         <div class="status" id="status">
           <div class="progress-wrap">
@@ -58,21 +56,18 @@
       </form>
     </section>
 
-    <section class="notes">
+    <section class="info">
       <div class="note">
         <h3>How it works</h3>
-        <p>Client-side app that walks the GitHub Contents API, streams each file, and zips on the fly with JSZip.</p>
+        <p>Uses the GitHub Contents API, streams files in parallel, zips with JSZip, no backend.</p>
       </div>
       <div class="note">
-        <h3>Privacy</h3>
-        <p>No servers. Everything runs in your browser; optional tokens never leave your device.</p>
+        <h3>Privacy first</h3>
+        <p>Everything runs locally in your browser. Optional tokens never leave the page.</p>
       </div>
       <div class="note">
-        <h3>Tips</h3>
-        <ul>
-          <li>Use full URLs for private repos with a token that has `repo` scope.</li>
-          <li>Keep directory sizes reasonable to avoid API limits.</li>
-        </ul>
+        <h3>Limits</h3>
+        <p>Soft cap of 4000 files to avoid API and memory issues. Add a token if you see 403.</p>
       </div>
     </section>
   </main>
