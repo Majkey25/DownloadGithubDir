@@ -7,6 +7,7 @@
   LOGO_SRC,
   FOOTER_TEXT,
   FOOTER_LINK,
+  PLACEHOLDER,
   SAMPLES
 } from './config.js';
 
@@ -26,7 +27,7 @@ const eyebrowEl = document.getElementById('eyebrow');
 const faviconEl = document.getElementById('favicon');
 const footerLinkEl = document.getElementById('footer-link');
 const footerTextEl = document.getElementById('footer-text');
-const typingSamples = SAMPLES.map(sample => `https://github.com/${sample}`);
+const typingSamples = [PLACEHOLDER];
 
 let typingTimer = null;
 let typingIndex = 0;

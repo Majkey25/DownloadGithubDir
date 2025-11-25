@@ -6,6 +6,7 @@ export const MAX_FILES = 4000;
 export const LOGO_SRC = 'assets/logo.svg?v=5';
 export const FOOTER_TEXT = 'Built by Majkey25 - GitHub Pages';
 export const FOOTER_LINK = 'https://majkey25.github.io/My-website-for-fun/';
+export const PLACEHOLDER = 'https://github.com/owner/repo/tree/branch/path';
 export const SAMPLES = [
   'vercel/next.js/tree/canary/examples/blog-starter',
   'microsoft/TypeScript/tree/main/src/compiler'
