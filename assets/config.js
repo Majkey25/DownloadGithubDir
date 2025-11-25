@@ -3,7 +3,7 @@ export const TAGLINE = 'Download any GitHub folder as a ZIP, entirely in your br
 export const API_BASE = 'https://api.github.com';
 export const DEFAULT_CONCURRENCY = 6;
 export const MAX_FILES = 4000;
-export const LOGO_SRC = 'assets/logo.svg';
+export const LOGO_SRC = 'assets/logo.svg?v=4';
 export const FOOTER_TEXT = 'Built by Majkey25 - GitHub Pages';
 export const FOOTER_LINK = 'https://majkey25.github.io/My-website-for-fun/';
 export const SAMPLES = [

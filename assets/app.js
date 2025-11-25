@@ -39,7 +39,7 @@ function setBranding() {
   brandLogoEl.src = LOGO_SRC;
   brandLogoEl.alt = `${APP_NAME} logo`;
   if (faviconEl) {
-    faviconEl.href = `${LOGO_SRC}?v=3`;
+    faviconEl.href = LOGO_SRC;
   }
   document.title = APP_NAME;
   heroTitleEl.textContent = 'Download any GitHub folder';
