@@ -1,4 +1,4 @@
-﻿import {
+import {
   APP_NAME,
   TAGLINE,
   API_BASE,
@@ -266,4 +266,5 @@ function setStatus(message, percent) {
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
+
 
