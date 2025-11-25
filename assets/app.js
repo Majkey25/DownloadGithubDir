@@ -24,6 +24,7 @@ let abortCurrent = null;
 
 setBranding();
 initSamples();
+document.addEventListener('DOMContentLoaded', () => document.body.classList.add('ready'));
 formEl.addEventListener('submit', onSubmit);
 
 function setBranding() {
