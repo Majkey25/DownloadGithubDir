@@ -1,13 +1,13 @@
 # DownloadGithubDir
 
-[![Release](https://img.shields.io/github/v/release/DownloadGithubDir/DownloadGithubDir)](https://github.com/DownloadGithubDir/DownloadGithubDir/releases)
-[![License](https://img.shields.io/github/license/DownloadGithubDir/DownloadGithubDir)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/DownloadGithubDir/DownloadGithubDir)](https://github.com/DownloadGithubDir/DownloadGithubDir/stargazers)
-[![Forks](https://img.shields.io/github/forks/DownloadGithubDir/DownloadGithubDir)](https://github.com/DownloadGithubDir/DownloadGithubDir/forks)
-[![Issues](https://img.shields.io/github/issues/DownloadGithubDir/DownloadGithubDir)](https://github.com/DownloadGithubDir/DownloadGithubDir/issues)
-[![PRs](https://img.shields.io/github/issues-pr/DownloadGithubDir/DownloadGithubDir)](https://github.com/DownloadGithubDir/DownloadGithubDir/pulls)
-[![Last Commit](https://img.shields.io/github/last-commit/DownloadGithubDir/DownloadGithubDir)](https://github.com/DownloadGithubDir/DownloadGithubDir/commits/main)
-[![GitHub Pages](https://img.shields.io/github/actions/workflow/status/DownloadGithubDir/DownloadGithubDir/pages.yml?label=pages)](./.github/workflows/pages.yml)
+[![Release](https://img.shields.io/github/v/release/DownloadGithubDir)](https://github.com/DownloadGithubDir//releases)
+[![License](https://img.shields.io/github/license/DownloadGithubDir)](LICENSE)
+[![Stars](https://img.shields.io/github/stars/DownloadGithubDir)](https://github.com/DownloadGithubDir/stargazers)
+[![Forks](https://img.shields.io/github/forks/DownloadGithubDir)](https://github.com/DownloadGithubDir/forks)
+[![Issues](https://img.shields.io/github/issues/DownloadGithubDir)](https://github.com/DownloadGithubDir/issues)
+[![PRs](https://img.shields.io/github/issues-pr/DownloadGithubDir/)](https://github.com/DownloadGithubDir/pulls)
+[![Last Commit](https://img.shields.io/github/last-commit/DownloadGithubDir)](https://github.com/DownloadGithubDir/commits/main)
+[![GitHub Pages](https://img.shields.io/github/actions/workflow/status/DownloadGithubDir/pages.yml?label=pages)](./.github/workflows/pages.yml)
 
 DownloadGithubDir is a fast, client-side tool that lets users download a specific folder from any GitHub repository as a ZIP file. It runs entirely in the browser (no backend), so it is safe to host on GitHub Pages and simple to operate.
 
