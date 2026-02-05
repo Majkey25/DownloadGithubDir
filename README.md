@@ -1,13 +1,13 @@
 # DownloadGithubDir
 
-[![Release](https://img.shields.io/github/v/release/DownloadGithubDir)](https://github.com/DownloadGithubDir//releases)
-[![License](https://img.shields.io/github/license/DownloadGithubDir)](LICENSE)
-[![Stars](https://img.shields.io/github/stars/DownloadGithubDir)](https://github.com/DownloadGithubDir/stargazers)
-[![Forks](https://img.shields.io/github/forks/DownloadGithubDir)](https://github.com/DownloadGithubDir/forks)
-[![Issues](https://img.shields.io/github/issues/DownloadGithubDir)](https://github.com/DownloadGithubDir/issues)
-[![PRs](https://img.shields.io/github/issues-pr/DownloadGithubDir/)](https://github.com/DownloadGithubDir/pulls)
-[![Last Commit](https://img.shields.io/github/last-commit/DownloadGithubDir)](https://github.com/DownloadGithubDir/commits/main)
-[![GitHub Pages](https://img.shields.io/github/actions/workflow/status/DownloadGithubDir/pages.yml?label=pages)](./.github/workflows/pages.yml)
+[![Release](https://img.shields.io/badge/release-v1.0.0-blue)](CHANGELOG.md)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+![Stars](https://img.shields.io/badge/stars-★-lightgrey)
+![Forks](https://img.shields.io/badge/forks-🍴-lightgrey)
+![Issues](https://img.shields.io/badge/issues-open-lightgrey)
+![PRs](https://img.shields.io/badge/PRs-open-lightgrey)
+![Last Commit](https://img.shields.io/badge/last%20commit-recent-lightgrey)
+[![GitHub Pages](https://img.shields.io/badge/pages-deploy-blueviolet)](./.github/workflows/pages.yml)
 
 DownloadGithubDir is a fast, client-side tool that lets users download a specific folder from any GitHub repository as a ZIP file. It runs entirely in the browser (no backend), so it is safe to host on GitHub Pages and simple to operate.
 
