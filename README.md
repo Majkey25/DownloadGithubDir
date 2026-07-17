@@ -29,11 +29,11 @@ DownloadGithubDir is a fast, client-side tool that lets users download a specifi
 - Download any GitHub folder by URL or by `owner/repo/path`.
 - Optional branch/tag and GitHub token support (rate limits + private repos).
 - Parallel file fetch, JSZip packaging, live progress, cancel support.
-- Responsive UI, sample shortcuts, zero data sent to a backend.
+- Responsive UI, sample shortcuts, and no application backend.
 - GitHub Pages workflow included for one-click hosting.
 
 ## How it works
-1. The browser calls the GitHub REST API to list files in the selected folder.
+1. The browser calls GitHub's Git Trees API to list the complete selected folder.
 2. Each file is fetched in parallel and assembled in memory.
 3. JSZip packages everything into a ZIP and triggers a download.
 
@@ -59,11 +59,12 @@ python -m http.server 8000
 - **Token**: Provide a fine-scoped Personal Access Token if you see `403` or need private access.
 
 ## Security & privacy
-- Tokens are used only in browser requests and never stored or transmitted elsewhere.
+- Tokens are sent only to GitHub API URLs and are never stored.
 - The app is static and runs entirely on the client.
 
 ## Limits
-- Soft cap of 4000 files to prevent excessive memory usage.
+- Hard cap of 4,000 files and 250 MiB per ZIP to bound browser memory use.
+- Truncated GitHub trees and folders containing submodules are refused instead of producing partial ZIPs.
 - If you hit `403` or API limits, add a token or narrow the folder.
 
 ## Tech stack

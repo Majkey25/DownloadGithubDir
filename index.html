@@ -8,98 +8,94 @@
   <meta http-equiv="Expires" content="0">
   <title>DownloadGithubDir</title>
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg?v=5">
-  <link rel="shortcut icon" type="image/svg+xml" href="assets/logo.svg?v=5">
-  <link rel="apple-touch-icon" href="assets/logo.svg?v=5">
-  <link id="favicon" rel="icon" type="image/svg+xml" href="assets/logo.svg?v=5">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=5">
+  <link rel="stylesheet" href="assets/style.css?v=6">
 </head>
 <body>
-  <div class="bg-overlay"></div>
   <header class="topbar">
-    <div class="brand" id="brand">
-      <img id="brand-logo" class="brand-logo" alt="DownloadGithubDir logo" src="assets/logo.svg?v=5">
-      <span id="brand-text">DownloadGithubDir</span>
-    </div>
+    <a class="brand" href="./">DownloadGithubDir</a>
     <nav class="nav">
-      <a href="https://docs.github.com/en/rest" target="_blank" rel="noreferrer">GitHub API</a>
-      <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://docs.github.com/en/rest" target="_blank" rel="noopener noreferrer">GitHub API</a>
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
     </nav>
   </header>
 
-  <main class="layout">
-    <section class="panel hero">
-      <div>
-        <p class="eyebrow" id="eyebrow">Instant GitHub folder ZIPs — client-side</p>
-        <h1 id="hero-title">Download any GitHub folder</h1>
-        <p class="lede" id="hero-tagline">
-          Download any GitHub folder as a ZIP, entirely in your browser.
+  <main>
+    <section class="workspace" aria-labelledby="hero-title">
+      <div class="intro">
+        <h1 id="hero-title">Download a<br>GitHub folder</h1>
+        <p class="lede">
+          Paste a folder URL. Get a ZIP.<br>No app server or saved token.
         </p>
-        <div class="chips" id="sample-links"></div>
       </div>
 
-      <form id="download-form" class="form">
-        <label for="input">GitHub URL or owner/repo/path</label>
-        <input id="input" name="input" autocomplete="off"
-          placeholder="https://github.com/owner/repo/tree/branch/path" required>
+      <div class="examples">
+        <h2>Try an example</h2>
+        <div id="sample-links"></div>
+      </div>
 
-        <div class="grid">
-          <div class="field">
-            <label for="branch">Branch or tag (optional)</label>
-            <input id="branch" name="branch" autocomplete="off" placeholder="main">
-          </div>
-          <div class="field">
-            <label for="token">Personal access token (optional)</label>
-            <input id="token" name="token" autocomplete="off" placeholder="ghp_xxx" type="password">
-            <p class="hint">
-              Token stays in your browser; use if you hit rate limits or for private repos.
-            </p>
-          </div>
+      <form id="download-form" class="form" novalidate>
+        <div class="field">
+          <label for="input">GitHub folder URL <span class="required" aria-hidden="true">*</span></label>
+          <input id="input" name="input" type="url" autocomplete="url"
+            placeholder="https://github.com/owner/repo/tree/branch/path"
+            aria-invalid="false" required>
         </div>
 
-        <button type="submit" id="submit">Download ZIP</button>
+        <div class="field">
+          <label for="branch">Branch or tag <span>(optional)</span></label>
+          <input id="branch" name="branch" autocomplete="off" placeholder="e.g., main, develop, v1.0.0">
+        </div>
 
-        <div class="status" id="status">
-          <div class="progress-wrap">
+        <div class="field">
+          <label for="token">Personal access token <span>(optional)</span></label>
+          <input id="token" name="token" autocomplete="off" placeholder="ghp_…" type="password"
+            aria-describedby="token-hint">
+          <p class="hint" id="token-hint">Used only for this download.</p>
+        </div>
+
+        <button class="submit" type="submit" id="submit">Download ZIP</button>
+
+        <div class="status" id="status" data-state="ready">
+          <div class="status-text" id="status-text" role="status">Ready to download</div>
+          <div class="progress-wrap" id="progress-wrap" role="progressbar"
+            aria-label="Download progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
             <div class="progress" id="progress"></div>
           </div>
-          <div class="status-text" id="status-text">Idle</div>
         </div>
       </form>
     </section>
 
-    <section class="info">
-      <div class="note">
-        <h3>How it works</h3>
-        <p>Uses the GitHub Contents API, streams files in parallel, zips with JSZip, no backend.</p>
+    <section class="info-rail" aria-label="Product details">
+      <div class="info-item">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M8 8 3 12l5 4M16 8l5 4-5 4M14 4l-4 16" />
+        </svg>
+        <p><strong>How it works</strong><span>Git Trees API → files → ZIP</span></p>
       </div>
-      <div class="note">
-        <h3>Privacy first</h3>
-        <p>Everything runs locally in your browser. Optional tokens never leave the page.</p>
-      </div>
-      <div class="note">
-        <h3>Tips</h3>
-        <p>
-          Use full URLs for private repos with a token that has repo scope. Keep folders reasonable.
-        </p>
+      <div class="info-item">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <rect x="5" y="10" width="14" height="11" rx="1" />
+          <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+        </svg>
+        <p><strong>Bounded in-browser</strong><span>Up to 4,000 files / 250 MiB.</span></p>
       </div>
     </section>
   </main>
 
-  <footer class="footer" id="footer">
-    <a class="footer-link" id="footer-link" href="https://majkey25.github.io/My-website-for-fun/"
-      target="_blank" rel="noreferrer">
-      <span class="footer-chip" id="footer-text">Built by Majkey25 - GitHub Pages</span>
-    </a>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
-  <script type="module" src="assets/app.js?v=5"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+    integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"
+    integrity="sha512-Qlv6VSKh1gDKGoJbnyA5RMXYcvnpIqhO++MhIM2fStMcGT9i2T//tSwYFlcyoRRDcDZ+TYHpH8azBBCyhpSeqw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="module" src="assets/app.js?v=8"></script>
 </body>
 </html>
 
