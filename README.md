@@ -61,6 +61,8 @@ python -m http.server 8000
 ## Security & privacy
 - Tokens are sent only to GitHub API URLs and are never stored.
 - The app is static and runs entirely on the client.
+- [Privacy, terms and contact](legal.html) describe GitHub requests and hosting logs.
+- JSZip and FileSaver.js are served locally from `assets/vendor`; their license notices are included.
 
 ## Limits
 - Hard cap of 4,000 files and 250 MiB per ZIP to bound browser memory use.
