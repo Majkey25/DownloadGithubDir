@@ -83,6 +83,7 @@ async function onSubmit(event) {
       console.error(error);
     }
   } finally {
+    tokenEl.value = '';
     submitEl.textContent = 'Download ZIP';
     submitEl.disabled = false;
     abortCurrent = null;

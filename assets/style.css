@@ -63,6 +63,15 @@ input {
   text-decoration: underline;
 }
 
+.site-footer {
+  padding: 24px clamp(28px, 3.2vw, 48px);
+  border-top: 1px solid var(--border);
+}
+
+.site-footer a {
+  color: var(--accent);
+}
+
 .workspace {
   min-height: max(680px, calc(100vh - 223px));
   display: grid;
@@ -195,7 +204,7 @@ input {
 }
 
 input::placeholder {
-  color: #858b91;
+  color: #687078;
   opacity: 1;
 }
 
