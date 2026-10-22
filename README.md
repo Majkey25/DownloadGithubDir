@@ -1,6 +1,6 @@
 # DownloadGithubDir
 
-[![Release](https://img.shields.io/badge/release-v1.0.0-blue)](CHANGELOG.md)
+[![Release](https://img.shields.io/badge/release-v1.0.1-blue)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 ![Stars](https://img.shields.io/badge/stars-★-lightgrey)
 ![Forks](https://img.shields.io/badge/forks-🍴-lightgrey)
@@ -67,6 +67,7 @@ python -m http.server 8000
 ## Limits
 - Hard cap of 4,000 files and 250 MiB per ZIP to bound browser memory use.
 - Truncated GitHub trees and folders containing submodules are refused instead of producing partial ZIPs.
+- File names with traversal, Windows device names, or other unsafe extraction syntax are refused.
 - If you hit `403` or API limits, add a token or narrow the folder.
 
 ## Tech stack
@@ -75,7 +76,7 @@ python -m http.server 8000
 - Static HTML/CSS with no build step
 
 ## Release
-- Current release: **v1.0.0** (see [CHANGELOG.md](CHANGELOG.md)).
+- Current release: **v1.0.1** (see [CHANGELOG.md](CHANGELOG.md)).
 - Versioning follows [SemVer](https://semver.org/).
 
 ## Contributing

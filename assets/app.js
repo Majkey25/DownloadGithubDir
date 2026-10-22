@@ -6,6 +6,7 @@
   RAW_BASE,
   SAMPLES
 } from './config.js?v=8';
+import { isSafeArchivePath } from './zip-path.js?v=1';
 
 const inputEl = document.getElementById('input');
 const branchEl = document.getElementById('branch');
@@ -355,8 +356,7 @@ async function collectFiles({ owner, repo, directory, commitSha, treeSha, token,
     }
     if (
       item?.type !== 'blob'
-      || typeof item.path !== 'string'
-      || !item.path
+      || !isSafeArchivePath(item.path)
       || !isValidSha(item.sha)
       || !Number.isSafeInteger(item.size)
       || item.size < 0
